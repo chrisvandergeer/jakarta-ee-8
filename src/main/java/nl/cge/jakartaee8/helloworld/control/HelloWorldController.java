@@ -10,6 +10,7 @@ public class HelloWorldController {
 
     public HelloWorld execute() {
         JobOperator jobOperator = BatchRuntime.getJobOperator();
+
         Long executionId = jobOperator.start("myBatchJob", new Properties());
 
         return new HelloWorld("Job startied, id = " + executionId);

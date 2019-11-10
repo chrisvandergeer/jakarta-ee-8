@@ -5,6 +5,7 @@ import javax.batch.runtime.context.JobContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,13 +26,13 @@ public class MyBatchItemReader extends AbstractItemReader {
         }
         jobContext.setTransientUserData(count);
         Integer item = numbers.get(count++);
-        System.out.println("readItem: " + item);
+        System.out.println(new Date() + "ReadItem: " + item);
         return item;
     }
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
-        numbers = IntStream.range(1, 10).boxed().collect(Collectors.toList());
+        numbers = IntStream.range(1, 100).boxed().collect(Collectors.toList());
         count = 0;
     }
 

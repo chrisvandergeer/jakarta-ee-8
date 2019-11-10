@@ -1,6 +1,6 @@
 <job id="myBatchJob" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
     <step id="firstChunkStep" >
-        <chunk item-count="3">
+        <chunk item-count="10">
             <reader ref="myBatchItemReader"/>
             <processor ref="myBatchItemProcessor"/>
             <writer ref="myBatchChunkWriter"/>

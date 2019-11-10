@@ -2,15 +2,17 @@ package nl.cge.jakartaee8.batch;
 
 import javax.batch.api.chunk.ItemProcessor;
 import javax.inject.Named;
+import java.util.Date;
 
 @Named
 public class MyBatchItemProcessor implements ItemProcessor {
 
     @Override
-    public Object processItem(Object item) throws Exception {
+    public String processItem(Object item) throws Exception {
         Integer number = (Integer) item;
-        int result = number * 1000;
-        System.out.println("processItem from " + number + " to " + result);
-        return result;
+        System.out.println(new Date() +" ProcessItem: " + number);
+        Thread.sleep(1000);
+        return String.format("'%s'", number.toString());
     }
+
 }
