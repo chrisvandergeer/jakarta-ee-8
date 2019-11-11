@@ -1,4 +1,4 @@
-package nl.cge.jakartaee8.batch;
+package nl.cge.jakartaee8.batch.control;
 
 import javax.batch.api.chunk.ItemProcessor;
 import javax.inject.Named;
@@ -11,7 +11,7 @@ public class MyBatchItemProcessor implements ItemProcessor {
     public String processItem(Object item) throws Exception {
         Integer number = (Integer) item;
         System.out.println(new Date() +" ProcessItem: " + number);
-        Thread.sleep(1000);
+        Thread.sleep(500);
         return String.format("'%s'", number.toString());
     }
 

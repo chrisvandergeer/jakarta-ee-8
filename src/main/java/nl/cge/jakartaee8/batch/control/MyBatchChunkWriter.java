@@ -1,4 +1,4 @@
-package nl.cge.jakartaee8.batch;
+package nl.cge.jakartaee8.batch.control;
 
 import javax.batch.api.chunk.AbstractItemWriter;
 import javax.inject.Named;
