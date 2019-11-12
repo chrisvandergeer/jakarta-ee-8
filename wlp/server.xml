@@ -21,6 +21,16 @@
   </basicRegistry>
   <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
   <httpEndpoint id="defaultHttpEndpoint" httpPort="9080" httpsPort="9443" host="*" />
+
+  <dataSource id="DefaultDataSource" jndiName="jdbc/derbyEmbedded">
+    <jdbcDriver libraryRef="DerbyLib"/>
+    <properties.derby.embedded databaseName="/home/chris/Data/jakarta-ee-8-db" createDatabase="create"/>
+  </dataSource>
+
+  <library id="DerbyLib">
+    <fileset dir="/home/chris/Apps/db-derby-10.14.2.0-bin/lib"/>
+  </library>
+
   <!-- Automatically expand WAR files and EAR files -->
   <authorization-roles id="com.ibm.ws.batch">
     <security-role name="batchAdmin">
