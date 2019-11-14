@@ -1,10 +1,11 @@
 package nl.cge.jakartaee8.batch.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.UUID;
+
+@Data
 @Entity
 public class MyEntity {
 
@@ -14,23 +15,15 @@ public class MyEntity {
 
     private String uuid;
 
+    @OneToOne
+    private MyEntity soulmate;
+
     public MyEntity() {
-        super();
+        this.uuid = UUID.randomUUID().toString();
     }
 
-    public MyEntity(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getUuid() {
-        return uuid;
+    @Override
+    public int hashCode() {
+        return uuid.substring(0, 5).hashCode();
     }
 }

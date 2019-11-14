@@ -1,13 +1,16 @@
 package nl.cge.jakartaee8.batch.control.prepare;
 
+import nl.cge.jakartaee8.batch.entity.MyBatchJob;
 import nl.cge.jakartaee8.batch.entity.MyEntity;
+import nl.cge.jakartaee8.batch.entity.MyEntityContainer;
 
 import javax.batch.api.AbstractBatchlet;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.UUID;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Named
@@ -18,23 +21,23 @@ public class PrepareBatch extends AbstractBatchlet {
 
     @Transactional(Transactional.TxType.REQUIRED)
     @Override
-    public String process() throws Exception {
-        try {
-            return doPrepare();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
+    public String process() {
+        List<MyEntityContainer> myEntityContainerList = IntStream.range(0, 100).boxed()
+                .map(i -> new MyEntityContainer())
+                .collect(Collectors.toList());
+        for (MyEntityContainer container : myEntityContainerList) {
+           IntStream.range(0, 100).boxed()
+                   .forEach(i -> {
+                       MyEntity myEntity = new MyEntity();
+                       em.persist(myEntity);
+                       container.add(myEntity);
+                   });
+           em.persist(container);
         }
-    }
-
-    private String doPrepare() {
-        IntStream.range(0, 100000).forEach(i -> {
-            MyEntity myEntity = new MyEntity();
-            em.persist(myEntity);
-            if (i % 250 == 0) {
-                System.out.println(myEntity.getId());
-            }
-        });
+        MyBatchJob myBatchJob = new MyBatchJob();
+        myBatchJob.setMyEntityContainerList(myEntityContainerList);
+        em.persist(myBatchJob);
         return "COMPLETED";
     }
+
 }

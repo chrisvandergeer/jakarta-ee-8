@@ -7,16 +7,5 @@
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
-<!--        <jta-data-source>java:jdbc/derbyEmbedded</jta-data-source>-->
-<!--        <properties>-->
-<!--            <property name="eclipselink.target-database" value="Derby"/>-->
-<!--            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>-->
-<!--            <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/weblogic;create=true"/>-->
-<!--            <property name="javax.persistence.jdbc.user" value="APP"/>-->
-<!--            <property name="javax.persistence.jdbc.password" value="APP"/>-->
-<!--            <property name="eclipselink.logging.level" value="ALL"/>-->
-<!--            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
-<!--            <property name="eclipselink.ddl-generation.output-mode" value="database"/>-->
-<!--        </properties>-->
     </persistence-unit>
 </persistence>
