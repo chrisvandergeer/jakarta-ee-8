@@ -5,6 +5,7 @@ import nl.cge.jakartaee8.batch.entity.MyEntity;
 import nl.cge.jakartaee8.batch.entity.MyEntityContainer;
 
 import javax.batch.api.AbstractBatchlet;
+import javax.batch.runtime.BatchStatus;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,7 +38,7 @@ public class PrepareBatch extends AbstractBatchlet {
         MyBatchJob myBatchJob = new MyBatchJob();
         myBatchJob.setMyEntityContainerList(myEntityContainerList);
         em.persist(myBatchJob);
-        return "COMPLETED";
+        return BatchStatus.COMPLETED.name();
     }
 
 }
