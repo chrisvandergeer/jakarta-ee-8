@@ -13,10 +13,11 @@ public class MyEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String uuid;
 
-    @OneToOne
-    private MyEntity soulmate;
+    @Column
+    private String calculatedUuid;
 
     public MyEntity() {
         this.uuid = UUID.randomUUID().toString();
@@ -26,4 +27,5 @@ public class MyEntity {
     public int hashCode() {
         return uuid.substring(0, 5).hashCode();
     }
+
 }

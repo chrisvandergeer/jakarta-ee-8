@@ -1,20 +1,24 @@
 package nl.cge.jakartaee8.batch.control.batch;
 
+import nl.cge.jakartaee8.batch.entity.MyEntity;
+
 import javax.batch.api.chunk.AbstractItemWriter;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.Date;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Named
 public class MyBatchChunkWriter extends AbstractItemWriter {
 
-    List<Integer> processed = new ArrayList<>();
+    @PersistenceContext(name = "my-pu")
+    private EntityManager em;
 
     @Override
-    public void writeItems(List<Object> items) throws Exception {
-        String result = items.stream().map(String.class::cast)
-                .reduce(new Date() + " WriteItems:", (a, b) -> a + " " + b);
-        System.out.println(result);
+    public void writeItems(List<Object> list) throws Exception {
+        list.stream()
+                .map(obj -> (MyEntity) obj)
+                .forEach(entity -> em.persist(entity));
     }
+
 }

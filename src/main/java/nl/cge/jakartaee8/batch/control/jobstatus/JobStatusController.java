@@ -1,5 +1,7 @@
 package nl.cge.jakartaee8.batch.control.jobstatus;
 
+import nl.cge.jakartaee8.batch.entity.MyEntity;
+
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.batch.runtime.JobExecution;
