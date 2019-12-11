@@ -4,9 +4,6 @@ import nl.cge.jakartaee8.batch.entity.MyEntity;
 
 import javax.batch.api.chunk.ItemProcessor;
 import javax.inject.Named;
-import java.util.Date;
-import java.util.UUID;
-import java.util.function.Supplier;
 
 @Named
 public class MyBatchItemProcessor implements ItemProcessor {

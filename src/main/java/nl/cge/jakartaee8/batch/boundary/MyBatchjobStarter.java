@@ -1,6 +1,5 @@
 package nl.cge.jakartaee8.batch.boundary;
 
-import com.sun.tools.javac.comp.Todo;
 import nl.cge.jakartaee8.batch.control.jobstatus.JobStatusController;
 import nl.cge.jakartaee8.batch.entity.TodoDto;
 
@@ -9,17 +8,12 @@ import javax.batch.runtime.BatchRuntime;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Properties;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Stateless
 @Produces("application/json")
@@ -39,6 +33,14 @@ public class MyBatchjobStarter {
     @GET
     public Response status() {
         return Response.ok(jobStatusController.getStatussen()).build();
+    }
+
+    @Path("statuslast")
+    @GET
+    public Response statuslast() {
+        return Response.ok(jobStatusController.getStatussen().stream().findAny())
+                .header("Accept", "application/json")
+                .build();
     }
 
     /**

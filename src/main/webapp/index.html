@@ -1,6 +1,59 @@
 <html>
-<head/>
-<body>
-    <h1>Welkom</h1>
-</body>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <h1>Welkom</h1>
+        <div id="app">
+            <p>{{ message }}</p>
+            <p>{{ status.batchStatus }}</p>
+        </div>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue!',
+                    status: {}
+                },
+                methods: {
+                    getStatus: function(event) {
+                        let xmlhttp = new XMLHttpRequest();
+                        const url = 'http://chris-vm60.home:9080/jakarta_ee_8_war_exploded/resources/mybatchjob/statuslast';
+                        xmlhttp.open("GET", url);
+                        xmlhttp.setRequestHeader("Accept", "application/json;charset=UTF-8");
+                        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        xmlhttp.send();
+                        xmlhttp.onloadend = (e) => {
+                            let parse = JSON.parse(xmlhttp.response);
+                            this.data = parse;
+                            console.log(this.data);
+                        }
+                    }
+                }
+            });
+            app.getStatus();
+
+            // let xmlhttp = new XMLHttpRequest();
+            // const url = 'http://chris-vm60.home:9080/jakarta_ee_8_war_exploded/resources/mybatchjob/statuslast';
+            // xmlhttp.open("GET", url);
+            // xmlhttp.setRequestHeader("Accept", "application/json;charset=UTF-8");
+            // xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            // xmlhttp.send();
+            // xmlhttp.onloadend = (e) => {
+            //     let response = xmlhttp.response;
+            //     console.log("text response: " + response);
+            //     let parse = JSON.parse(response);
+            //     app.data.status = parse;
+            //     console.log(parse);
+            // }
+            // xmlhttp.onreadystatechange = (e) => {
+            //     let response = xmlhttp.response;
+            //
+            //     console.log("text response: " + response);
+            //     let parse = JSON.parse(response);
+            //     console.log(parse);
+            // }
+
+        </script>
+    </body>
 </html>
