@@ -12,6 +12,6 @@ public class JobStatusDto {
     private String jobName;
     private String batchStatus;
     private String exitStatus;
-//    private Date startTime;
-//    private Date endTime;
+    private Date startTime;
+    private Date endTime;
 }

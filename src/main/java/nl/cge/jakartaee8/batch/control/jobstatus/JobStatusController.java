@@ -22,8 +22,8 @@ public class JobStatusController {
         dto.setJobName(jobExecution.getJobName());
         dto.setBatchStatus(jobExecution.getBatchStatus().name());
         dto.setExitStatus(jobExecution.getExitStatus());
-//        dto.setStartTime(jobExecution.getStartTime());
-//        dto.setEndTime(jobExecution.getEndTime());
+        dto.setStartTime(jobExecution.getStartTime());
+        dto.setEndTime(jobExecution.getEndTime());
         return dto;
     }
 }

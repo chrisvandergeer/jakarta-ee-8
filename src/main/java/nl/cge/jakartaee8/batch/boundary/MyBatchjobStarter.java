@@ -35,14 +35,6 @@ public class MyBatchjobStarter {
         return Response.ok(jobStatusController.getStatussen()).build();
     }
 
-    @Path("statuslast")
-    @GET
-    public Response statuslast() {
-        return Response.ok(jobStatusController.getStatussen().stream().findAny())
-                .header("Accept", "application/json")
-                .build();
-    }
-
     /**
      * Start de batchjob.
      */
