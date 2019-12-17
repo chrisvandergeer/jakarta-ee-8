@@ -1,7 +1,6 @@
 package nl.cge.jakartaee8.batch.boundary;
 
 import nl.cge.jakartaee8.batch.control.jobstatus.JobStatusController;
-import nl.cge.jakartaee8.batch.entity.TodoDto;
 
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
@@ -46,15 +45,4 @@ public class MyBatchjobStarter {
         return Response.ok(jobStatusController.getStatussen()).build();
     }
 
-    @Path("todo")
-    @GET
-    public Response showTodo() {
-        Long totalCount = em.createQuery("select count(e) from MyEntity e", Long.class)
-                .getSingleResult();
-        Long todoCount = em.createQuery("select count(e) from MyEntity e where e.calculatedUuid is null", Long.class)
-                .getSingleResult();
-        TodoDto todoDto = new TodoDto(totalCount, todoCount);
-        return Response.ok(todoDto).build();
-
-    }
 }
